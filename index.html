@@ -282,9 +282,7 @@ function trackEngagedLead(){
   if(typeof fbq !== 'undefined'){
     fbq('trackCustom', 'EngagedLeadDBTest', {value: 5, currency: 'EUR'});
   }
-  setTimeout(function(){
-    window.location.href = 'https://www.skool.com/marthyn/about';
-  }, 500);
+  window.location.href = 'https://www.skool.com/marthyn/about';
 }
 
 function loadVid(){
