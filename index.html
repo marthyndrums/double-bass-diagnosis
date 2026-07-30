@@ -233,7 +233,7 @@ function showResult(){
   h+='<div class="divider"></div>';
   h+='<div class="cta-box">';
   h+='<p class="cta-label">Start your 7-day free trial</p>';
-  h+='<a class="cta-btn" href="https://www.skool.com/marthyn/about" onclick="trackEngagedLead()"><strong>TEST IT FOR FREE</strong> →</a>';
+  h+='<a class="cta-btn" href="#" onclick="trackEngagedLead(); return false;"><strong>TEST IT FOR FREE</strong> →</a>';
   h+='</div>';
   var r=document.getElementById('result');
   r.innerHTML=h;
@@ -282,6 +282,9 @@ function trackEngagedLead(){
   if(typeof fbq !== 'undefined'){
     fbq('trackCustom', 'EngagedLeadDBTest', {value: 5, currency: 'EUR'});
   }
+  setTimeout(function(){
+    window.location.href = 'https://www.skool.com/marthyn/about';
+  }, 500);
 }
 
 function loadVid(){
