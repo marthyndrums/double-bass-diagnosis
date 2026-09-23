@@ -171,31 +171,8 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <p class="qlabel">Almost there</p>
     <h2 class="email-gate-title">Your diagnosis is ready.</h2>
     <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
-    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-    <form action="https://app.kit.com/forms/9414084/subscriptions" 
-          class="seva-form formkit-form" 
-          method="post" 
-          data-sv-form="9414084" 
-          data-uid="8d81262e41" 
-          data-format="inline" 
-          data-version="5"
-          id="ck-form"
-          onsubmit="handleFormSubmit(event)">
-      <div data-element="fields" data-stacked="false">
-        <div class="formkit-field">
-          <input class="email-input" 
-                 name="email_address" 
-                 id="email-input"
-                 aria-label="Email Address" 
-                 placeholder="Enter your email address" 
-                 required 
-                 type="email" />
-        </div>
-        <button data-element="submit" class="email-submit" type="submit">
-          Show me my diagnosis →
-        </button>
-      </div>
-    </form>
+    <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
+    <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
     <p class="email-error" id="email-error">Please enter a valid email address.</p>
     <p class="privacy-note">No spam. Unsubscribe anytime.</p>
   </div>
@@ -301,22 +278,20 @@ function showEmailGate(){
   window.scrollTo(0,0);
 }
 
-function handleFormSubmit(e){
-  e.preventDefault();
+function submitEmail(){
   var email = document.getElementById('email-input').value;
   var errorEl = document.getElementById('email-error');
-  var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!re.test(email)){
+  if(!email || email.indexOf('@') === -1){
     errorEl.style.display='block';
     return;
   }
   errorEl.style.display='none';
   window.storedEmail = email;
 
-  // Submit the ConvertKit form natively
-  var form = document.getElementById('ck-form');
-  var formData = new FormData(form);
-  fetch(form.action, {
+  // Submit to ConvertKit
+  var formData = new FormData();
+  formData.append('email_address', email);
+  fetch('https://app.kit.com/forms/9414084/subscriptions', {
     method: 'POST',
     body: formData,
     mode: 'no-cors'
@@ -326,10 +301,6 @@ function handleFormSubmit(e){
   document.getElementById('email-gate').classList.remove('visible');
   document.getElementById('qualifying-gate').style.display = 'block';
   window.scrollTo(0,0);
-}
-
-function submitEmail(){
-  handleFormSubmit(new Event('submit'));
 }
 
 
