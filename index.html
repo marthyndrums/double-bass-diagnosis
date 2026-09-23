@@ -22,7 +22,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 16px;min-height:100vh}
@@ -174,14 +173,13 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
     <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
     <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
-    <p class="email-error" id="email-error">Please enter a valid email address.</p>
-    <p class="privacy-note">No spam. Unsubscribe anytime.</p>
+    <p class="privacy-note" style="font-size:12px;color:#aaa;text-align:center;margin-top:10px;">No spam. Unsubscribe anytime.</p>
   </div>
 
 <div id="qualifying-gate" style="display:none;padding:24px 0;">
   <p style="font-size:13px;font-weight:500;color:#888;margin:0 0 8px;letter-spacing:.04em;">One quick question before your results appear.</p>
   <p style="font-size:19px;font-weight:600;color:#1a1a1a;margin:0 0 24px;line-height:1.4;">If I coached you personally, would you be willing to invest money to finally reach your double bass goals?</p>
-  <button onclick="handleQualifying(true)" style="display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #1a1a1a;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;margin-bottom:10px;">Yes — I'm ready to invest in your coaching</button>
+  <button onclick="handleQualifying(true)" style="display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #1a1a1a;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;margin-bottom:10px;">Yes — I'd invest if you help me reach my double bass goals</button>
   <button onclick="handleQualifying(false)" style="display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #e5e5e5;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;">No — I'm not ready to invest money right now</button>
 </div>
 
@@ -281,13 +279,11 @@ function showEmailGate(){
 
 function submitEmail(){
   var email = document.getElementById('email-input').value;
-  var errorEl = document.getElementById('email-error');
   var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!re.test(email)){
-    errorEl.style.display='block';
     return;
   }
-  errorEl.style.display='none';
+  window.storedEmail = email;
 
   // Submit to ConvertKit
   var formData = new FormData();
@@ -333,16 +329,8 @@ function handleQualifying(isHighIntent){
 }
 
 function addConvertKitTag(tagId){
-  // Get email from stored value
-  var email = document.getElementById('email-input').value;
-  var formData = new FormData();
-  formData.append('email_address', email);
-  formData.append('tags[]', tagId);
-  fetch('https://app.kit.com/forms/9414084/subscriptions', {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-  }).catch(function(){});
+  // Tag functionality reserved for future implementation via ConvertKit API
+  // Facebook pixel events are handled separately in handleQualifying()
 }
 
 function startCountdown(){
