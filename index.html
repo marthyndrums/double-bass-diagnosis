@@ -171,21 +171,36 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <p class="qlabel">Almost there</p>
     <h2 class="email-gate-title">Your diagnosis is ready.</h2>
     <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
-    <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
-    <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
-    <p class="email-error" id="email-error">Please enter a valid email address.</p>
-    <p class="privacy-note">No spam. Unsubscribe anytime.</p>
-    <iframe id="ck-iframe" 
-            style="display:none;width:0;height:0;border:none;position:absolute;" 
-            name="ck-iframe">
-    </iframe>
-    <form id="ck-form" 
-          action="https://app.kit.com/forms/9414084/subscriptions" 
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+    <form action="https://app.kit.com/forms/9414084/subscriptions" 
+          class="seva-form formkit-form" 
           method="post" 
-          target="ck-iframe"
-          style="display:none;">
-      <input type="email" name="email_address" id="ck-email-hidden" />
+          data-sv-form="9414084" 
+          data-uid="8d81262e41" 
+          data-format="inline" 
+          data-version="5"
+          style="background:transparent !important;padding:0 !important;max-width:100% !important;">
+      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+      <div data-element="fields" data-stacked="true" class="seva-fields formkit-fields" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="formkit-field">
+          <input class="formkit-input email-input" 
+                 name="email_address" 
+                 id="email-input"
+                 aria-label="Email Address" 
+                 placeholder="Enter your email address" 
+                 required 
+                 type="email"
+                 style="width:100%;padding:14px 16px;border:1.5px solid #e5e5e5;border-radius:12px;font-size:15px;color:#1a1a1a;background:#fff;outline:none;box-sizing:border-box;" />
+        </div>
+        <button data-element="submit" 
+                class="formkit-submit email-submit"
+                style="width:100%;padding:14px;border-radius:12px;border:none;background:#1a1a1a;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">
+          <span>Show me my diagnosis →</span>
+        </button>
+      </div>
+      <div class="formkit-powered-by-convertkit-container" style="display:none !important;"></div>
     </form>
+    <p class="privacy-note" style="font-size:12px;color:#aaa;text-align:center;margin-top:10px;">No spam. Unsubscribe anytime.</p>
   </div>
 
 <div id="qualifying-gate" style="display:none;padding:24px 0;">
@@ -290,20 +305,33 @@ function showEmailGate(){
 }
 
 function submitEmail(){
-  var email = document.getElementById('email-input').value;
-  var errorEl = document.getElementById('email-error');
-  if(!email || email.indexOf('@') === -1){
-    errorEl.style.display='block';
-    return;
+  // Not used - ConvertKit handles submission natively
+}
+
+// Listen for ConvertKit successful submission
+window.addEventListener('message', function(e){
+  if(e.data && e.data.type === 'formkit:submit'){
+    showQualifyingGate();
   }
-  errorEl.style.display='none';
-  window.storedEmail = email;
+});
 
-  // Submit to ConvertKit via hidden form targeting iframe
-  document.getElementById('ck-email-hidden').value = email;
-  document.getElementById('ck-form').submit();
+// Also intercept via ConvertKit's custom event
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(function(){
+    var ckForms = document.querySelectorAll('.seva-form');
+    ckForms.forEach(function(form){
+      form.addEventListener('submit', function(){
+        var email = document.getElementById('email-input').value;
+        window.storedEmail = email;
+        setTimeout(function(){
+          showQualifyingGate();
+        }, 500);
+      });
+    });
+  }, 1000);
+});
 
-  // Hide email gate and show qualifying question
+function showQualifyingGate(){
   document.getElementById('email-gate').classList.remove('visible');
   document.getElementById('qualifying-gate').style.display = 'block';
   window.scrollTo(0,0);
