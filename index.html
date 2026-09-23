@@ -119,16 +119,6 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
   </div>
 
 
-  <div class="email-gate" id="email-gate">
-    <p class="qlabel">Almost there</p>
-    <h2 class="email-gate-title">Your diagnosis is ready.</h2>
-    <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
-    <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
-    <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
-    <p class="email-error" id="email-error">Please enter a valid email address.</p>
-    <p class="privacy-note">No spam. Unsubscribe anytime.</p>
-  </div>
-
   <div class="q visible" id="q1">
     <p class="qlabel">Question 1 of 4</p>
     <p class="qtext">Where are you right now with double bass?</p>
@@ -178,7 +168,16 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <div class="nav"><button class="btn" id="btn4" disabled onclick="showEmailGate()">Get my diagnosis →</button></div>
   </div>
 
-  
+  <div class="email-gate" id="email-gate">
+    <p class="qlabel">Almost there</p>
+    <h2 class="email-gate-title">Your diagnosis is ready.</h2>
+    <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
+    <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
+    <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
+    <p class="email-error" id="email-error">Please enter a valid email address.</p>
+    <p class="privacy-note">No spam. Unsubscribe anytime.</p>
+  </div>
+
 <div id="qualifying-gate" style="display:none;padding:24px 0;">
   <p style="font-size:13px;font-weight:500;color:#888;margin:0 0 8px;letter-spacing:.04em;">One quick question before your results appear.</p>
   <p style="font-size:19px;font-weight:600;color:#1a1a1a;margin:0 0 24px;line-height:1.4;">If I coached you personally, would you be willing to invest money to finally reach your double bass goals?</p>
