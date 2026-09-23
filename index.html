@@ -22,6 +22,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 16px;min-height:100vh}
@@ -79,15 +80,6 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
   .countdown-bar{width:200px;height:3px;background:#e5e5e5;border-radius:2px;overflow:hidden}
   .countdown-progress{height:100%;background:#1a1a1a;border-radius:2px;width:100%;transition:width 3s linear}
   .result-blurred{filter:blur(8px);pointer-events:none;user-select:none}
-  .qualifying-gate{display:none}
-  .qualifying-gate.visible{display:block}
-  .qualifying-title{font-size:13px;font-weight:500;color:var(--color-text-secondary,#888);margin-bottom:6px;letter-spacing:.04em}
-  .qualifying-question{font-size:19px;font-weight:600;color:#1a1a1a;margin:0 0 24px;line-height:1.4}
-  .qualifying-btn{display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #e5e5e5;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;margin-bottom:10px;transition:border-color .15s,background .15s}
-  .qualifying-btn:hover{border-color:#1a1a1a;background:#fafafa}
-  .qualifying-btn.yes{border-color:#1a1a1a}
-  .qualifying-btn.no{}
-
 
   .email-gate{display:none}
   .email-gate.visible{display:block}
@@ -99,7 +91,8 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
   .email-submit:hover{opacity:.85}
   .email-error{color:#e53e3e;font-size:13px;margin-top:8px;display:none}
   .privacy-note{font-size:12px;color:#aaa;text-align:center;margin-top:10px}
-
+  .qual-gate{display:none}
+  .qual-gate.visible{display:block}
 </style>
 </head>
 <body>
@@ -117,6 +110,31 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <div class="step" id="p4"></div>
   </div>
 
+
+  <div class="email-gate" id="email-gate">
+    <p class="qlabel">Almost there</p>
+    <h2 class="email-gate-title">Your diagnosis is ready.</h2>
+    <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
+    <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
+    <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
+    <p class="email-error" id="email-error">Please enter a valid email address.</p>
+    <p class="privacy-note">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <div class="qual-gate" id="qual-gate">
+    <p class="qlabel">One quick question before your results appear.</p>
+    <p class="qtext">If I coached you personally, would you be willing to invest money to finally reach your double bass goals?</p>
+    <div class="opts" style="margin-top:8px;">
+      <div class="opt" onclick="handleQualifying(true)" style="cursor:pointer;">
+        <div class="radio"></div>
+        <span class="optlabel">Yes — I'd invest if you help me reach my double bass goals</span>
+      </div>
+      <div class="opt" onclick="handleQualifying(false)" style="cursor:pointer;">
+        <div class="radio"></div>
+        <span class="optlabel">No — I'm not ready to invest money right now</span>
+      </div>
+    </div>
+  </div>
 
   <div class="q visible" id="q1">
     <p class="qlabel">Question 1 of 4</p>
@@ -167,22 +185,7 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <div class="nav"><button class="btn" id="btn4" disabled onclick="showEmailGate()">Get my diagnosis →</button></div>
   </div>
 
-  <div class="email-gate" id="email-gate">
-    <p class="qlabel">Almost there</p>
-    <h2 class="email-gate-title">Your diagnosis is ready.</h2>
-    <p class="email-gate-sub">Enter your email and we'll show you exactly what's holding you back.</p>
-    <input class="email-input" type="email" id="email-input" placeholder="Enter your email address" />
-    <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
-    <p class="privacy-note" style="font-size:12px;color:#aaa;text-align:center;margin-top:10px;">No spam. Unsubscribe anytime.</p>
-  </div>
-
-<div id="qualifying-gate" style="display:none;padding:24px 0;">
-  <p style="font-size:13px;font-weight:500;color:#888;margin:0 0 8px;letter-spacing:.04em;">One quick question before your results appear.</p>
-  <p style="font-size:19px;font-weight:600;color:#1a1a1a;margin:0 0 24px;line-height:1.4;">If I coached you personally, would you be willing to invest money to finally reach your double bass goals?</p>
-  <button onclick="handleQualifying(true)" style="display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #1a1a1a;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;margin-bottom:10px;">Yes — I'd invest if you help me reach my double bass goals</button>
-  <button onclick="handleQualifying(false)" style="display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #e5e5e5;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;">No — I'm not ready to invest money right now</button>
-</div>
-
+  
 <div class="countdown-overlay hidden" id="countdown-overlay">
   <p class="countdown-text">Finding your double bass weak spot</p>
   <div class="countdown-number" id="countdown-number">3</div>
@@ -279,11 +282,13 @@ function showEmailGate(){
 
 function submitEmail(){
   var email = document.getElementById('email-input').value;
+  var errorEl = document.getElementById('email-error');
   var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!re.test(email)){
+    errorEl.style.display='block';
     return;
   }
-  window.storedEmail = email;
+  errorEl.style.display='none';
 
   // Submit to ConvertKit
   var formData = new FormData();
@@ -296,28 +301,21 @@ function submitEmail(){
 
   // Hide email gate and show qualifying question
   document.getElementById('email-gate').classList.remove('visible');
-  document.getElementById('qualifying-gate').style.display = 'block';
+  document.getElementById('qual-gate').classList.add('visible');
   window.scrollTo(0,0);
 }
 
-
-function handleQualifying(isHighIntent){
+function handleQualifying(isYes){
   // Hide qualifying gate
-  document.getElementById('qualifying-gate').style.display = 'none';
+  document.getElementById('qual-gate').classList.remove('visible');
 
-  // Fire appropriate Facebook pixel event and add ConvertKit tag
-  if(isHighIntent){
-    if(typeof fbq !== 'undefined'){
+  // Fire Facebook pixel event
+  if(typeof fbq !== 'undefined'){
+    if(isYes){
       fbq('track', 'CompleteRegistration');
-    }
-    // Add high-intent tag to ConvertKit
-    addConvertKitTag(23849945);
-  } else {
-    if(typeof fbq !== 'undefined'){
+    } else {
       fbq('track', 'Lead');
     }
-    // Add low-intent tag to ConvertKit
-    addConvertKitTag(23849949);
   }
 
   // Show result blurred in background
@@ -325,22 +323,15 @@ function handleQualifying(isHighIntent){
   document.getElementById('result').classList.add('result-blurred');
 
   // Show countdown overlay
-  startCountdown();
-}
-
-function addConvertKitTag(tagId){
-  // Tag functionality reserved for future implementation via ConvertKit API
-  // Facebook pixel events are handled separately in handleQualifying()
-}
-
-function startCountdown(){
   var overlay = document.getElementById('countdown-overlay');
   overlay.classList.remove('hidden');
 
+  // Start progress bar
   setTimeout(function(){
     document.getElementById('countdown-progress').style.width = '0%';
   }, 50);
 
+  // Countdown
   var count = 3;
   document.getElementById('countdown-number').textContent = count;
 
@@ -350,6 +341,7 @@ function startCountdown(){
       document.getElementById('countdown-number').textContent = count;
     } else {
       clearInterval(timer);
+      // Hide overlay and unblur result
       overlay.classList.add('hidden');
       document.getElementById('result').classList.remove('result-blurred');
       window.scrollTo(0,0);
