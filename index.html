@@ -80,6 +80,15 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
   .countdown-bar{width:200px;height:3px;background:#e5e5e5;border-radius:2px;overflow:hidden}
   .countdown-progress{height:100%;background:#1a1a1a;border-radius:2px;width:100%;transition:width 3s linear}
   .result-blurred{filter:blur(8px);pointer-events:none;user-select:none}
+  .qualifying-gate{display:none}
+  .qualifying-gate.visible{display:block}
+  .qualifying-title{font-size:13px;font-weight:500;color:var(--color-text-secondary,#888);margin-bottom:6px;letter-spacing:.04em}
+  .qualifying-question{font-size:19px;font-weight:600;color:#1a1a1a;margin:0 0 24px;line-height:1.4}
+  .qualifying-btn{display:block;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #e5e5e5;background:#fff;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;text-align:left;margin-bottom:10px;transition:border-color .15s,background .15s}
+  .qualifying-btn:hover{border-color:#1a1a1a;background:#fafafa}
+  .qualifying-btn.yes{border-color:#1a1a1a}
+  .qualifying-btn.no{}
+
 
   .email-gate{display:none}
   .email-gate.visible{display:block}
@@ -283,23 +292,61 @@ function submitEmail(){
     mode: 'no-cors'
   }).catch(function(){});
 
-  // Hide email gate
+  // Hide email gate and show qualifying question
   document.getElementById('email-gate').classList.remove('visible');
+  document.getElementById('qualifying-gate').classList.add('visible');
+  window.scrollTo(0,0);
+}
+
+
+function handleQualifying(isHighIntent){
+  // Hide qualifying gate
+  document.getElementById('qualifying-gate').classList.remove('visible');
+
+  // Fire appropriate Facebook pixel event and add ConvertKit tag
+  if(isHighIntent){
+    if(typeof fbq !== 'undefined'){
+      fbq('track', 'CompleteRegistration');
+    }
+    // Add high-intent tag to ConvertKit
+    addConvertKitTag(23849945);
+  } else {
+    if(typeof fbq !== 'undefined'){
+      fbq('track', 'Lead');
+    }
+    // Add low-intent tag to ConvertKit
+    addConvertKitTag(23849949);
+  }
 
   // Show result blurred in background
   showResult();
   document.getElementById('result').classList.add('result-blurred');
 
   // Show countdown overlay
+  startCountdown();
+}
+
+function addConvertKitTag(tagId){
+  // Get email from stored value
+  var email = document.getElementById('email-input').value;
+  var formData = new FormData();
+  formData.append('email_address', email);
+  formData.append('tags[]', tagId);
+  fetch('https://app.kit.com/forms/9414084/subscriptions', {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+  }).catch(function(){});
+}
+
+function startCountdown(){
   var overlay = document.getElementById('countdown-overlay');
   overlay.classList.remove('hidden');
 
-  // Start progress bar
   setTimeout(function(){
     document.getElementById('countdown-progress').style.width = '0%';
   }, 50);
 
-  // Countdown
   var count = 3;
   document.getElementById('countdown-number').textContent = count;
 
@@ -309,11 +356,6 @@ function submitEmail(){
       document.getElementById('countdown-number').textContent = count;
     } else {
       clearInterval(timer);
-      // Fire Lead pixel event
-      if(typeof fbq !== 'undefined'){
-        fbq('track', 'Lead');
-      }
-      // Hide overlay and unblur result
       overlay.classList.add('hidden');
       document.getElementById('result').classList.remove('result-blurred');
       window.scrollTo(0,0);
