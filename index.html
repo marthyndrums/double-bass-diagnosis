@@ -175,6 +175,17 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     <button class="email-submit" onclick="submitEmail()">Show me my diagnosis →</button>
     <p class="email-error" id="email-error">Please enter a valid email address.</p>
     <p class="privacy-note">No spam. Unsubscribe anytime.</p>
+    <iframe id="ck-iframe" 
+            style="display:none;width:0;height:0;border:none;position:absolute;" 
+            name="ck-iframe">
+    </iframe>
+    <form id="ck-form" 
+          action="https://app.kit.com/forms/9414084/subscriptions" 
+          method="post" 
+          target="ck-iframe"
+          style="display:none;">
+      <input type="email" name="email_address" id="ck-email-hidden" />
+    </form>
   </div>
 
 <div id="qualifying-gate" style="display:none;padding:24px 0;">
@@ -288,14 +299,9 @@ function submitEmail(){
   errorEl.style.display='none';
   window.storedEmail = email;
 
-  // Submit to ConvertKit
-  var formData = new FormData();
-  formData.append('email_address', email);
-  fetch('https://app.kit.com/forms/9414084/subscriptions', {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-  }).catch(function(){});
+  // Submit to ConvertKit via hidden form targeting iframe
+  document.getElementById('ck-email-hidden').value = email;
+  document.getElementById('ck-form').submit();
 
   // Hide email gate and show qualifying question
   document.getElementById('email-gate').classList.remove('visible');
