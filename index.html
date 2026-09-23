@@ -289,7 +289,7 @@ function submitEmail(){
   }
   errorEl.style.display='none';
 
-  // Submit to ConvertKit
+  // Submit to ConvertKit immediately
   var formData = new FormData();
   formData.append('email_address', email);
   fetch('https://app.kit.com/forms/9414084/subscriptions', {
@@ -297,6 +297,9 @@ function submitEmail(){
     body: formData,
     mode: 'no-cors'
   }).catch(function(){});
+
+  // Store email for tag reference
+  window.storedEmail = email;
 
   // Hide email gate and show qualifying question
   document.getElementById('email-gate').classList.remove('visible');
@@ -333,16 +336,8 @@ function handleQualifying(isHighIntent){
 }
 
 function addConvertKitTag(tagId){
-  // Get email from stored value
-  var email = document.getElementById('email-input').value;
-  var formData = new FormData();
-  formData.append('email_address', email);
-  formData.append('tags[]', tagId);
-  fetch('https://app.kit.com/forms/9414084/subscriptions', {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-  }).catch(function(){});
+  // Tag functionality reserved for future implementation via ConvertKit API
+  // Facebook pixel events are handled separately in handleQualifying()
 }
 
 function startCountdown(){
