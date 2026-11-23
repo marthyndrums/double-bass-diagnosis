@@ -73,13 +73,6 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
   .cta-text{font-size:14px;color:#1a1a1a;line-height:1.6;margin:0 0 16px}
   .cta-btn{display:inline-block;padding:12px 24px;border-radius:8px;border:none;background:#2E777B;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.17);box-shadow:0 5px 15px rgba(46,119,123,.25);font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .15s}
   .cta-btn:hover{background:#266468;opacity:1}
-  .countdown-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
-  .countdown-overlay.hidden{display:none}
-  .countdown-text{font-size:16px;font-weight:500;color:#666;letter-spacing:.04em;text-align:center}
-  .countdown-number{font-size:72px;font-weight:700;color:#1a1a1a;line-height:1}
-  .countdown-bar{width:200px;height:3px;background:#e5e5e5;border-radius:2px;overflow:hidden}
-  .countdown-progress{height:100%;background:#1a1a1a;border-radius:2px;width:100%;transition:width 3s linear}
-  .result-blurred{filter:blur(8px);pointer-events:none;user-select:none}
 
   .email-gate{display:none}
   .email-gate.visible{display:block}
@@ -198,13 +191,6 @@ src="https://www.facebook.com/tr?id=1406495980373118&ev=PageView&noscript=1"
     </div>
     <div class="nav"><button class="btn" id="btn4" disabled onclick="showEmailGate()">Get my diagnosis →</button></div>
   </div>
-
-  
-<div class="countdown-overlay hidden" id="countdown-overlay">
-  <p class="countdown-text">Finding your double bass weak spot</p>
-  <div class="countdown-number" id="countdown-number">3</div>
-  <div class="countdown-bar"><div class="countdown-progress" id="countdown-progress"></div></div>
-</div>
 <div class="result" id="result"></div>
   </div><!-- /quiz-shell -->
 </div><!-- /wrap -->
@@ -218,33 +204,133 @@ function startQuiz(){
 
 var A={q1:null,q2:null,q3:null,q4:null};
 var D={
-  low:{
-    shin:{p:"At 100–140 BPM your hip flexor is the primary driver — and right now it doesn't have enough strength to move the pedal cleanly at that speed. So your shin steps in to compensate. That's where the burn is coming from. It's not a foot problem. It's a hip flexor strength problem.",t:"The good news — the hip flexor responds quickly to the right isolation work. Most drummers feel a real difference within two to three weeks."},
-    fatigue:{p:"At 100–140 BPM your hip flexor is doing all the work. And when it's undertrained, it burns out fast — usually within two to three minutes of continuous playing. That's not a stamina problem. That's a muscle strength problem. Your hip flexor simply doesn't have enough endurance yet to sustain that tempo.",t:"The good news — targeted hip flexor isolation work builds endurance faster than most drummers expect. Two to three weeks of the right exercises makes a noticeable difference."},
-    leftfoot:{p:"At 100–140 BPM this is almost always a hip flexor imbalance between your two legs. Your right hip flexor has years of practice behind it. Your left is significantly undertrained by comparison. So the moment you push toward your limit, the weaker side falls behind — and the gap between your feet gets wider the faster you go.",t:"The good news — hip flexor imbalances respond well to isolated left foot training. Most drummers start hearing a real difference within two to three weeks of focused work on the weaker side."},
-    twitching:{p:"At 100–140 BPM twitching almost always means one thing — your hip flexor is reaching its strength limit and starting to break down. When a muscle doesn't have enough strength to execute a movement cleanly at a given speed, it starts firing inconsistently. That nervous, unsteady feeling isn't a coordination problem. It's your hip flexor failing under load.",t:"The good news — once you isolate and strengthen the hip flexor correctly, the twitching disappears. Most drummers see a significant improvement within two to three weeks."},
-    balance:{p:"At 100–140 BPM balance problems almost always trace back to throne position and hip flexor weakness combined. When your hip flexor doesn't have enough strength to drive the pedal cleanly, your body compensates by leaning forward — trying to use your bodyweight to create the power your muscle can't generate on its own. It feels like a balance problem. But the root cause is underneath it.",t:"The good news — fixing your throne height and hip flexor strength solves this faster than most drummers expect. Two to three weeks of the right work and the compensation disappears."}
+  "beginner": {
+    "shin": {
+      "title": "Your Weak Spot: Shin Tension",
+      "happening": "Does the front of your lower leg start burning even when you're not playing very fast? Maybe your feet feel stiff, and you have to force every stroke. It's frustrating when a simple double bass pattern already feels like hard work. That can happen when you're using more tension than the movement needs.",
+      "good": "Imagine getting through those patterns with more control and less effort. You can build speed on a much better foundation than simply pushing harder.",
+      "next": "Here's where we start with our students: first, we train a simple leg-lifting movement on the floor. Then we bring it to the pedals without forcing the strokes. If you feel actual pain, stop rather than pushing through it. Want your feet to feel easier to control? Watch the short video below."
+    },
+    "fatigue": {
+      "title": "Your Weak Spot: Early Fatigue",
+      "happening": "Do your legs get tired long before the song is finished? Maybe a short double bass run feels fine, but you can't keep it going. That can make even slower songs frustrating. It may feel like you need more stamina, when the bigger issue could be how much effort you're using for every stroke.",
+      "good": "Imagine playing steady double bass without feeling worn out after a few bars. You don't have to make every practice session longer to work toward that.",
+      "next": "With our students, we build the basic lifting movement on the floor first. Then we transfer it to the pedals and gradually build longer, cleaner runs. This gives you something specific to train instead of just playing until you're exhausted. Want to play longer without your feet giving up? Watch the short video below."
+    },
+    "leftfoot": {
+      "title": "Your Weak Spot: Left-Foot Control",
+      "happening": "Does your right foot feel natural while your left seems awkward? Maybe you can play a pattern with one foot, but both feet together sound uneven. It can feel as if your left foot has a lot of catching up to do. That's a familiar problem when you're building double bass control.",
+      "good": "Imagine both feet working together, with clean strokes that stay in time. Your weaker foot can become something you train with a clear plan.",
+      "next": "Here's how we start with our students: move both feet together on the floor. This lets you compare them without the pedals getting in the way. Then take that same movement to the pedals at a comfortable tempo. Want your left foot to finally keep up? Watch the short video below."
+    },
+    "twitching": {
+      "title": "Your Weak Spot: Foot Control",
+      "happening": "Do your feet sometimes move faster than you want them to? Maybe you start a double bass run and the notes rush, stumble, or won't line up. Other times the exact same pattern feels easier. It's hard to build confidence when you can't predict what your feet will do.",
+      "good": "Imagine starting a pattern cleanly and keeping the notes where you want them. Control is a skill you can train, even before you chase higher tempos.",
+      "next": "With our students, we first slow the movement down and practice starting and stopping on purpose. We build a steady motion before asking for more speed. This makes practice much more specific than just hoping the next run feels better. Want to feel in control of every stroke? Watch the short video below."
+    },
+    "balance": {
+      "title": "Your Weak Spot: Balance",
+      "happening": "Do you lean forward or feel unsteady as soon as both feet leave the floor? Maybe your hands are fine until you add double bass. Then your whole body has to work just to stay in position. That makes it difficult to play comfortably, even before you try to go faster.",
+      "good": "Imagine sitting comfortably behind the kit while both feet move freely. A better starting position can make your double bass practice feel very different.",
+      "next": "Here's where we start with our students: check your throne height, sit a little farther back, and test whether you can lift both feet without tipping forward. We sort out the sitting position before pushing the tempo. Want to feel stable behind the kit? Watch the short video below."
+    }
   },
-  mid:{
-    shin:{p:"At 140–170 BPM your hip flexor is hitting its natural speed ceiling. At this tempo range the calf needs to start taking over — but if the ankle technique hasn't been developed yet, your shin steps in to fill the gap. That's where the burn is coming from. You're stuck in a transition zone between two techniques and your body is using the wrong muscle to bridge it.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    fatigue:{p:"At 140–170 BPM fatigue this quickly means your hip flexor is carrying a load it was never built to handle at this speed. The hip flexor is a powerful muscle but it's not designed for sustained fast movement past this tempo range. Your calf is — but it hasn't been trained to take over yet. So your hip flexor keeps working overtime until it burns out completely.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    leftfoot:{p:"At 140–170 BPM left foot lag almost always means you're sitting right at the boundary between two technique zones. Your dominant foot has naturally started developing calf-driven movement at this speed — even unconsciously. Your left foot is still relying entirely on the hip flexor. So the gap between your feet widens exactly at the moment the hip flexor starts running out of steam on your weaker side.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    twitching:{p:"At 140–170 BPM twitching is a very specific signal. Your hip flexor has reached its absolute speed limit and is starting to break down — but your calf hasn't been trained to take over yet. So your feet are caught between two techniques with no muscle group in control. That nervous, unsteady feeling is your body searching for a movement pattern that doesn't exist yet.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    balance:{p:"At 140–170 BPM balance problems point to one specific thing — your body is trying to use momentum and bodyweight to push through a tempo range that your muscles can't yet handle cleanly. The hip flexor is running out of power and the calf hasn't been developed yet to take over. So your upper body starts compensating by leaning forward, trying to generate force from above rather than from the correct muscle below.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."}
+  "low": {
+    "shin": {
+      "title": "Your Weak Spot: Shin Tension",
+      "happening": "Around 100–140 BPM, your feet might start feeling tense even though the tempo doesn't seem that fast. Maybe the front of your lower legs burns, and you feel like you have to fight the pedals to keep the notes going. It's especially frustrating when you've practiced regularly but the movement still feels forced.",
+      "good": "Imagine playing those middle tempos with clean, powerful strokes and much less wasted effort. More speed doesn't always require more force.",
+      "next": "With our students, we first train the leg-lifting movement on the floor. Then we bring it onto the pedals while keeping the movement controlled. That gives us a clear starting point instead of forcing the tempo higher. If you're experiencing pain, stop rather than pushing through it. Want to stop fighting your pedals? Watch the short video below."
+    },
+    "fatigue": {
+      "title": "Your Weak Spot: Endurance",
+      "happening": "Can you play at 100–140 BPM for a short time, but not as long as the song needs? Maybe the first few bars sound good. Then your legs get heavy, the strokes get quieter, and your timing starts to slip. It's frustrating to know you can reach a tempo but not keep it going.",
+      "good": "Imagine playing a full double bass passage with the same power and control from start to finish. That's a better goal than a few fast seconds.",
+      "next": "Here's how we work on this with our students: we train the lifting movement away from the pedals, then build controlled runs on the kit. We focus on efficient strokes before adding more time. Want to play longer without burning out? Watch the short video below."
+    },
+    "leftfoot": {
+      "title": "Your Weak Spot: Left-Foot Control",
+      "happening": "Does your right foot keep time while your left foot falls behind? Maybe you can get both feet moving at 100–140 BPM, but the strokes don't sound equally strong. The faster you go, the bigger the difference feels. And repeating the same pattern doesn't always seem to close the gap.",
+      "good": "Imagine both feet sounding even and powerful, without constantly checking whether your left foot is keeping up. You can train that weaker side with a clear method.",
+      "next": "With our students, we start with both feet moving together on the floor. This builds the same basic movement on each side. Then we repeat it on the pedals at a tempo both feet can control. Want your left foot to finally keep up? Watch the short video below."
+    },
+    "twitching": {
+      "title": "Your Weak Spot: Speed Control",
+      "happening": "Maybe you can play smoothly at a slower tempo, but around 100–140 BPM your feet start to twitch or rush. Some days the notes line up. Other days they don't, even at a speed you've played before. That inconsistency is frustrating because it's hard to know what to practice next.",
+      "good": "Imagine playing those tempos with steady, even strokes instead of hoping your feet cooperate. You can make control the focus of your practice.",
+      "next": "Here's where we start with our students: we build a clean lifting movement on the floor, then transfer it to the pedals at a speed you can control. We don't chase faster notes until that movement stays steady. Want to stop losing control when you speed up? Watch the short video below."
+    },
+    "balance": {
+      "title": "Your Weak Spot: Balance",
+      "happening": "Does your upper body start leaning forward when you play both pedals? Maybe 100–140 BPM feels manageable for a moment, but you can't stay relaxed in your seat. Your hands and feet become harder to coordinate because you're busy trying to stay balanced. That can make progress feel harder than it should.",
+      "good": "Imagine playing clean double bass while sitting comfortably, with your legs free to move. You might be able to improve your control before increasing your practice time.",
+      "next": "With our students, we check the sitting position first. We raise the throne if needed, sit back, and test whether both feet can lift without the upper body tipping forward. Then we return to the pedals. Want to feel stable while playing faster? Watch the short video below."
+    }
   },
-  high:{
-    shin:{p:"At 170+ BPM shin burn means one thing — you're trying to force speed with the wrong muscle entirely. At this tempo range the calf reflex needs to be doing the work. But if the ankle technique hasn't been correctly isolated, the shin steps in and tries to generate the speed your calf isn't producing yet. The shin was never built for this. It burns out in seconds.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    fatigue:{p:"At 170+ BPM fatigue this quickly means your calf hasn't been trained to work as a reflex muscle yet. Instead your hip flexor is still trying to drive the pedal at a speed it was never designed for. The hip flexor is a powerful muscle but at this tempo range it burns out in minutes. Your calf is built for exactly this kind of fast sustained movement — but only if it's been correctly isolated and activated.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    leftfoot:{p:"At 170+ BPM left foot lag points to a calf activation imbalance between your two legs. Your dominant foot has likely developed some natural calf reflex movement at this speed through years of practice. Your left foot is still relying on hip flexor drive — a muscle that simply cannot operate cleanly at this tempo range. So the moment you push past 170 your left foot falls apart while your right keeps going.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    twitching:{p:"At 170+ BPM twitching is a very precise signal — your calf is trying to activate but hasn't been correctly isolated and trained yet. So instead of a clean controlled reflex motion, it fires inconsistently and erratically. That nervous unsteady feeling isn't a speed problem or a coordination problem. It's a muscle activation problem. Your calf knows it needs to work at this tempo — it just hasn't learned how to fire correctly yet.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."},
-    balance:{p:"At 170+ BPM balance problems almost always mean the same thing — your calf isn't doing its job yet. So your body cheats. It leans forward and uses your bodyweight to push the pedal instead. The faster you go, the more you lean. And the more you lean, the more unstable everything gets. It feels like a balance problem. But the real issue is underneath it.",t:"The good news — this is one of the most common plateaus for drummers, and also one of the fastest to break through once you start isolating the right muscle groups. Most drummers feel a shift within two to three weeks."}
+  "mid": {
+    "shin": {
+      "title": "Your Weak Spot: Shin Tension",
+      "happening": "Maybe you've reached 140–170 BPM, but the faster you go, the more your shins burn. You can sometimes push through a short burst, yet it doesn't feel smooth or controlled. And even after practicing, that uncomfortable feeling keeps coming back. It's easy to wonder whether more practice is actually helping.",
+      "good": "Imagine reaching those faster tempos with clean strokes and less unnecessary effort. You don't have to rely on forcing every note harder.",
+      "next": "Here's what we work on with our students: we separate the movement used for slower playing from the smaller movement needed at higher speeds. Then we train each one without rushing the transition. If you feel actual pain, don't push through it. Want to play faster without fighting your pedals? Watch the short video below."
+    },
+    "fatigue": {
+      "title": "Your Weak Spot: Endurance",
+      "happening": "Can you reach 140–170 BPM for a short burst, but struggle to keep it going? Maybe your feet feel strong at first. Then the strokes lose power, the timing gets messy, and you have to stop. It's frustrating when you can play a song's tempo but can't make it through the whole passage.",
+      "good": "Imagine playing those fast sections from beginning to end with steady, powerful strokes. Your goal isn't just to hit the number. It's to own that tempo.",
+      "next": "With our students, we work on making the movement more efficient before building longer runs. At this speed, that may mean learning a different movement instead of simply pushing your legs harder. Want to turn short bursts into usable double bass speed? Watch the short video below."
+    },
+    "leftfoot": {
+      "title": "Your Weak Spot: Left-Foot Control",
+      "happening": "Does your right foot feel comfortable while your left struggles to keep up? Maybe everything works fine at slower tempos. But as soon as you push the speed, your strokes become uneven. And no matter how much you practice, your left foot always seems one step behind.",
+      "good": "Imagine playing clean, powerful double bass with both feet working together. You might not need more practice time. You may just need a better way to train your weaker foot.",
+      "next": "Here's how we work on this with our students. We start by training both feet together on the floor. This helps you develop the same movement with both feet. Then we transfer that movement onto the pedals. Want your left foot to finally keep up? Watch the short video below."
+    },
+    "twitching": {
+      "title": "Your Weak Spot: Speed Control",
+      "happening": "Do your feet suddenly start twitching when you approach 140–170 BPM? Maybe you can play the tempo for a few seconds, but your feet won't stay under control. One day it feels easy. The next day the same speed feels impossible. That makes it hard to trust your playing.",
+      "good": "Imagine playing clean, even notes at these tempos without your feet racing ahead. You can build a movement that's easier to start, stop, and control.",
+      "next": "With our students, we work on controlling the faster foot movement at slower speeds first. We train clean starts and stops before trying longer runs. The goal is to control the notes, not just produce them. Want your feet to stop twitching when you speed up? Watch the short video below."
+    },
+    "balance": {
+      "title": "Your Weak Spot: Balance",
+      "happening": "At 140–170 BPM, it may feel like your whole body starts helping your feet. You lean forward, tighten up, or shift on the throne just to keep the strokes going. Maybe you can hit the tempo, but it never feels comfortable. That instability makes clean playing much harder.",
+      "good": "Imagine staying relaxed and balanced while your feet handle the faster notes. More control can make the tempo feel far less intimidating.",
+      "next": "Here's where we start with our students: we check your throne height and how far back you're sitting. Then we test whether both feet can move without your upper body doing the work. Once the position feels stable, we build the foot movement. Want to feel in control at faster tempos? Watch the short video below."
+    }
   },
-  beginner:{
-    shin:{p:"At this tempo range shin burn is almost always a sign that you're using too much force from the wrong muscle right from the start. Even at slow tempos, if the hip flexor movement hasn't been correctly isolated yet, the shin steps in immediately. This is actually the best time to catch and fix this — before the wrong muscle memory gets locked in.",t:"The good news — this is one of the most common problems for drummers starting out, and also one of the fastest to fix once you start training the right muscle from the beginning. Most drummers feel a real difference within two to three weeks."},
-    fatigue:{p:"At slow tempos fatigue this quickly is a clear sign that you're using your full leg to drive the pedal instead of isolating the correct muscle group. When the whole leg works as one unit it burns out fast — even at low speeds. You haven't built any wrong muscle memory yet which means you're starting with a clean slate.",t:"The good news — this is one of the most common problems for drummers starting out, and also one of the fastest to fix once you start training the right muscle from the beginning. Most drummers feel a real difference within two to three weeks."},
-    leftfoot:{p:"At slow tempos a weak left foot simply means your left foot has never been properly trained. Your right foot has years of natural movement behind it. Your left is starting from zero. So even at slow tempos the gap feels huge. The good news is there are no bad habits to unlearn yet — just a clean slate to build on correctly from the start.",t:"The good news — this is one of the most common problems for drummers starting out, and also one of the fastest to fix once you start training the right muscle from the beginning. Most drummers feel a real difference within two to three weeks."},
-    twitching:{p:"At slow tempos twitching is almost always a tension problem. When double bass feels unfamiliar your body tenses up — and tension kills control instantly. The foot doesn't twitch because it's too slow or too weak. It twitches because the muscles are fighting each other instead of working together. This is completely normal at the beginning and disappears quickly once the correct movement pattern gets established.",t:"The good news — this is one of the most common problems for drummers starting out, and also one of the fastest to fix once you start training the right muscle from the beginning. Most drummers feel a real difference within two to three weeks."},
-    balance:{p:"At slow tempos balance problems almost always come down to throne setup. When your throne is too low your hips drop below your knees — and from that position your legs simply can't move freely. Your body compensates by leaning forward to try to create space and movement. It feels like a balance problem but it's actually a setup problem. The position you're sitting in is working against you before you even play a single note.",t:"The good news — this is one of the most common problems for drummers starting out, and also one of the fastest to fix once you start training the right muscle from the beginning."}
+  "high": {
+    "shin": {
+      "title": "Your Weak Spot: Shin Tension",
+      "happening": "You can already reach 170 BPM or faster. But maybe your shins start burning when you try to stay there. A short burst might work, while a longer run feels forced and tense. That can be frustrating when your goal is to play fast, clean strokes for an entire section of a song.",
+      "good": "Imagine playing those high tempos with a lighter, more controlled movement. The goal is speed you can use, not a few seconds you can barely survive.",
+      "next": "With our students, we focus on a smaller heel-lifting movement and keeping the upper leg relaxed. We train the motion away from the pedals, then bring it back to the kit. If you're feeling pain rather than ordinary effort, stop and address it. Want faster strokes with less strain? Watch the short video below."
+    },
+    "fatigue": {
+      "title": "Your Weak Spot: Endurance",
+      "happening": "Maybe you can hit 170, 180, or even 200 BPM, but only for a short time. The speed is there. What you're missing is the ability to keep it clean and powerful. When your feet fade halfway through a song, that top-speed number doesn't feel very useful.",
+      "good": "Imagine playing fast double bass for longer stretches without losing the sound or control you worked so hard to build. That's the kind of speed that matters on stage or in a recording.",
+      "next": "Here's how we train this with our students: we refine the smaller movement used at high tempos, then build longer controlled runs. We don't use endless, exhausting practice as the starting point. Want your fast double bass to last longer? Watch the short video below."
+    },
+    "leftfoot": {
+      "title": "Your Weak Spot: Left-Foot Control",
+      "happening": "Your right foot may already handle 170 BPM and beyond, while your left foot makes the notes uneven. Maybe the left beater feels less predictable, or you struggle to start a fast run cleanly. The frustrating part is knowing one foot can do it while the other keeps holding you back.",
+      "good": "Imagine both feet producing the same clean, powerful strokes at your next speed goal. That kind of control is worth more than simply pushing your strongest foot faster.",
+      "next": "With our students, we train the smaller high-speed movement with both feet together, away from the pedals first. Then we transfer it to the pedals and compare both sides. Want your left foot to keep up when the tempo gets serious? Watch the short video below."
+    },
+    "twitching": {
+      "title": "Your Weak Spot: High-Speed Control",
+      "happening": "Maybe your feet can move incredibly fast, but they don't always move when you want them to. The first notes rush, the strokes become uneven, or your feet start twitching instead of playing a steady rhythm. It's frustrating to have the speed but not the control to use it in a song.",
+      "good": "Imagine starting a fast run cleanly, staying in time, and stopping exactly where the song needs you to. That's the kind of control that makes high speed useful.",
+      "next": "Here's how we work on this with our students: we build control over the small, fast foot movement, then practice clean starts and stops. We make the movement predictable before extending the run. Want to turn raw speed into clean double bass playing? Watch the short video below."
+    },
+    "balance": {
+      "title": "Your Weak Spot: Balance",
+      "happening": "Maybe you can play 170 BPM or faster, but your body moves almost as much as your feet. You lean forward, tense your upper legs, or feel like you're slipping out of position. That makes it tough to stay accurate during longer passages, even when you have enough speed.",
+      "good": "Imagine staying steady on the throne while your feet handle the fast notes. You can work toward more control without forcing your whole body into every stroke.",
+      "next": "With our students, we first make sure the sitting position supports both feet. Then we practice the smaller high-speed movement while keeping the upper body stable. The goal is to let the feet do the work. Want fast double bass without losing your balance? Watch the short video below."
+    }
   }
 };
 
@@ -274,18 +360,18 @@ function showResult(){
   var d=D[A.q1][A.q3];
   var label=BL[A.q1];
   var h='';
-  h+='<div class="result-badge">Your diagnosis</div>';
-  h+='<h2 class="result-title">Here\'s what\'s actually holding you back at '+label+'</h2>';
-  h+='<div class="card"><p class="card-label">What\'s happening</p><p class="card-text">'+d.p+'</p></div>';
-  h+='<div class="card"><p class="card-label">The good news</p><p class="card-text">'+d.t+'</p></div>';
-  h+='<div class="card"><p class="card-label">Your next step</p><p class="card-text">The fix is simpler than you think — watch this short video below.</p></div>';
+  h+='<div class="result-badge">Your double bass test result · '+label+'</div>';
+  h+='<h2 class="result-title">'+d.title+'</h2>';
+  h+='<div class="card"><p class="card-label">What\'s Happening</p><p class="card-text">'+d.happening+'</p></div>';
+  h+='<div class="card"><p class="card-label">The Good News</p><p class="card-text">'+d.good+'</p></div>';
+  h+='<div class="card"><p class="card-label">What to Work on Next</p><p class="card-text">'+d.next+'</p></div>';
   h+='<div class="divider"></div>';
 
   h+='<div style="position:relative;padding-bottom:56.25%;height:0;margin-bottom:24px;border-radius:12px;overflow:hidden"><iframe src="https://player.vimeo.com/video/1227014189?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe></div>';
   h+='<div class="divider"></div>';
   h+='<div class="cta-box">';
   h+='<p class="cta-label">Start your 7-day free trial</p>';
-  h+='<a class="cta-btn" href="#" onclick="trackEngagedLead(); return false;"><strong>TEST IT FOR FREE</strong> →</a>';
+  h+='<a class="cta-btn" href="https://www.skool.com/marthyn/about" onclick="return trackSkoolCTA(event)"><strong>TEST IT FOR FREE</strong> →</a>';
   h+='</div>';
   var r=document.getElementById('result');
   r.innerHTML=h;
@@ -320,46 +406,45 @@ function submitEmail(){
     mode: 'no-cors'
   }).catch(function(){});
 
-  // Hide email gate
+  // Show the results immediately after a valid email is submitted.
   document.getElementById('email-gate').classList.remove('visible');
-
-  // Show result blurred in background
   showResult();
-  document.getElementById('result').classList.add('result-blurred');
 
-  // Show countdown overlay
-  var overlay = document.getElementById('countdown-overlay');
-  overlay.classList.remove('hidden');
-
-  // Start progress bar
-  setTimeout(function(){
-    document.getElementById('countdown-progress').style.width = '0%';
-  }, 50);
-
-  // Countdown
-  var count = 3;
-  document.getElementById('countdown-number').textContent = count;
-
-  var timer = setInterval(function(){
-    count--;
-    if(count > 0){
-      document.getElementById('countdown-number').textContent = count;
-    } else {
-      clearInterval(timer);
-      // Fire Lead pixel event
-      if(typeof fbq !== 'undefined'){
-        fbq('track', 'Lead');
-      }
-      // Hide overlay and unblur result
-      overlay.classList.add('hidden');
-      document.getElementById('result').classList.remove('result-blurred');
-      window.scrollTo(0,0);
-    }
-  }, 1000);
+  // Preserve the existing Meta Lead event (now without the countdown delay).
+  // Note: the current no-cors Kit submission cannot be verified here.
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead');
+  }
+  window.scrollTo(0,0);
 }
 
-function trackEngagedLead(){
-  window.location.href = 'https://www.skool.com/marthyn/about';
+// Track the final CTA as CompleteRegistration so it is eligible for Meta Sales
+// campaign optimization. This measures the click to Skool, NOT a completed signup.
+var skoolCTATracked = false;
+function trackSkoolCTA(event){
+  if(!skoolCTATracked){
+    skoolCTATracked = true;
+    if(typeof fbq === 'function'){
+      // Label the event clearly so click intent isn't confused with confirmed trials.
+      fbq('track', 'CompleteRegistration', {
+        content_name: 'Skool Trial CTA Click',
+        registration_step: 'skool_about_page_click'
+      });
+    }
+  }
+
+  // Preserve standard browser behavior for open-in-new-tab shortcuts.
+  if(event && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0)){
+    return true;
+  }
+  if(typeof fbq !== 'function'){
+    return true; // The anchor's real href still works if the pixel is blocked.
+  }
+
+  // Small delay to let the Pixel request initiate before the external navigation.
+  // This is not a countdown and does not guarantee delivery if tracking is blocked.
+  setTimeout(function(){ window.location.href = 'https://www.skool.com/marthyn/about'; }, 200);
+  return false;
 }
 
 function loadVid(){
